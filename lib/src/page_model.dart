@@ -5,15 +5,14 @@ class PageModel {
   final String? body;
   final String? imagePath;
   final Color? pageColor;
-  final Color? titleColor;
-  final Color? bodyColor;
+  final Color? titleTextColor;
+  final Color? bodyTextColor;
 
-  PageModel({
-    required this.title,
-    required this.body,
-    required this.imagePath,
-    this.pageColor,
-    this.titleColor,
-    this.bodyColor
-  });
+  PageModel(
+      {required this.title,
+      required this.body,
+      required this.imagePath,
+      this.pageColor,
+      this.titleTextColor,
+      this.bodyTextColor});
 }

@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         finishButtonText: "Get Started",
         activeDotColor: Colors.deepPurple,
         // showAnimation: false,
+
         onFinishClick: () {
           debugPrint('Onboarding completed');
           // Navigate to your desired page here.

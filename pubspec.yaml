@@ -1,7 +1,7 @@
 name: custom_onboard
-description: "A new Flutter project."
+description: "To implement customizable onboard screens easily"
 version: 0.0.1
-homepage:
+homepage: https://github.com/ahmedkhan4u/custom_onboard.git
 
 environment:
   sdk: ^3.5.4

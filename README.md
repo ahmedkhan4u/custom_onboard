@@ -2,7 +2,7 @@
 
 This project provides a customizable onboarding component for Flutter apps. It allows you to create onboarding screens with flexible design and behavior options.
 
-[Uploading Custom Onboard.webm…]()
+[Custom Onboard.webm](https://github.com/user-attachments/assets/1dd68fd9-6a52-4d25-a6b4-f00866873f31)
 
 ## Features
 - Multiple onboarding screens

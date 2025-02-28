@@ -112,9 +112,11 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
 
     return Stack(
       children: [
-        PageView(
+        PageView.builder(
+          itemCount: widget.pages.length,
           controller: _pageController,
-          children: widget.pages.map((page) {
+          itemBuilder: (context, index) {
+            final page = widget.pages[index];
             return Container(
               padding: const EdgeInsets.all(16),
               color: page.pageColor,
@@ -173,7 +175,7 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                 ),
               ),
             );
-          }).toList(),
+          },
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -257,7 +259,6 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                           alignment: Alignment.bottomRight,
                           child: Material(
                             child: InkWell(
-
                                 onTap: widget.onFinishClick,
                                 child: Container(
                                     decoration: widget.finishButtonBoxDecoration ?? widget.buttonBoxDecoration,

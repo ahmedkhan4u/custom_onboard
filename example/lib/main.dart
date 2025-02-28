@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Custom Onboard',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
           PageModel(
             title: "Onboarding 1",
             body:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
             imagePath: "assets/images/onboard1.png",
           ),
           PageModel(
@@ -55,9 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
 
         finishButtonText: "Get Started",
-        activeDotColor: Colors.deepPurple,
         // showAnimation: false,
-
         onFinishClick: () {
           debugPrint('Onboarding completed');
           // Navigate to your desired page here.

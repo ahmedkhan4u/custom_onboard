@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class CustomOnboard extends StatefulWidget {
   final List<PageModel> pages;
+
   final bool? showDots;
   final Color? activeDotColor;
   final Color? inactiveDotColor;
@@ -117,55 +118,59 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
             return Container(
               padding: const EdgeInsets.all(16),
               color: page.pageColor,
-              child: Column(
-                children: [
-                  SizedBox(height: height * 0.18),
-                  SizedBox(
-                    height: height * 0.3,
-                    child: widget.showAnimation
-                        ? ScaleTransition(
-                            scale: _animation,
-                            child: Visibility(
-                              visible: _currentPage == widget.pages.indexOf(page),
-                              child: Image.asset(
-                                page.imagePath!,
-                                height: height * 0.3,
-                                width: width * 1,
-                                fit: BoxFit.fitHeight,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.18),
+                    SizedBox(
+                      height: height * 0.3,
+                      child: widget.showAnimation
+                          ? ScaleTransition(
+                              scale: _animation,
+                              child: Visibility(
+                                visible: _currentPage == widget.pages.indexOf(page),
+                                child: Image.asset(
+                                  page.imagePath!,
+                                  height: height * 0.3,
+                                  width: width * 1,
+                                  fit: BoxFit.fitHeight,
+                                ),
                               ),
+                            )
+                          : Image.asset(
+                              page.imagePath!,
+                              height: height * 0.3,
+                              width: width * 1,
+                              fit: BoxFit.fitHeight,
                             ),
-                          )
-                        : Image.asset(
-                            page.imagePath!,
-                            height: height * 0.3,
-                            width: width * 1,
-                            fit: BoxFit.fitHeight,
+                    ),
+                    SizedBox(height: height * 0.04),
+                    Text(
+                      page.title!,
+                      // maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: widget.titleTextStyle ??
+                          TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: page.titleTextColor,
                           ),
-                  ),
-                  SizedBox(height: height * 0.04),
-                  Text(
-                    page.title!,
-                    textAlign: TextAlign.center,
-                    style: widget.titleTextStyle ??
-                        TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: page.titleTextColor,
-                        ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  Text(
-                    page.body!,
-                    textAlign: widget.bodyTextAlignment ?? TextAlign.center,
-                    style: widget.bodyTextStyle ??
-                        TextStyle(
-                          fontSize: 18,
-                          color: page.bodyTextColor,
-                        ),
-                  ),
-                ],
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Text(
+                      page.body!,
+                      textAlign: widget.bodyTextAlignment ?? TextAlign.center,
+                      style: widget.bodyTextStyle ??
+                          TextStyle(
+                            fontSize: 18,
+                            color: page.bodyTextColor,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             );
           }).toList(),
@@ -250,17 +255,20 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                       Expanded(
                           child: Align(
                           alignment: Alignment.bottomRight,
-                          child: InkWell(
-                              onTap: widget.onFinishClick,
-                              child: Container(
-                                  decoration: widget.finishButtonBoxDecoration ?? widget.buttonBoxDecoration,
-                                  padding: widget.buttonPadding,
-                                  child: Text(
-                                    widget.finishButtonText ?? "Finish",
-                                    style: widget.finishButtonTextStyle ??
-                                        widget.buttonTextStyle ??
-                                        TextStyle(fontSize: 16, color: widget.finishButtonTextColor),
-                                  ))),
+                          child: Material(
+                            child: InkWell(
+
+                                onTap: widget.onFinishClick,
+                                child: Container(
+                                    decoration: widget.finishButtonBoxDecoration ?? widget.buttonBoxDecoration,
+                                    padding: widget.buttonPadding,
+                                    child: Text(
+                                      widget.finishButtonText ?? "Finish",
+                                      style: widget.finishButtonTextStyle ??
+                                          widget.buttonTextStyle ??
+                                          TextStyle(fontSize: 16, color: widget.finishButtonTextColor),
+                                    ))),
+                          ),
                         )),
                 ],
               ),

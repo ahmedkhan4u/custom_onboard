@@ -48,21 +48,29 @@ CustomOnboard(
 )
 ```
 
-## Parameters
+### Properties
 
-| Parameter              | Type                    | Default          | Description                           |
-|-----------------------|------------------------|------------------|---------------------------------------|
-| `pages`                | `List<PageModel>`       | Required         | Onboarding pages data                 |
-| `showDots`             | `bool?`                | `true`           | Show or hide dot indicators           |
-| `activeDotColor`       | `Color?`               | `Colors.black`   | Color of the active dot               |
-| `inactiveDotColor`     | `Color?`               | `Colors.grey`    | Color of inactive dots                |
-| `skipButtonText`       | `String?`              | `null`           | Text for the skip button              |
-| `nextButtonText`       | `String?`              | `null`           | Text for the next button              |
-| `finishButtonText`     | `String?`              | `null`           | Text for the finish button            |
-| `showSkipButton`       | `bool?`                | `true`           | Show or hide the skip button          |
-| `onSkipClick`          | `void Function()?`     | `null`           | Callback when skip button is clicked  |
-| `onFinishClick`        | `void Function()?`     | `null`           | Callback when finish button is clicked|
-| `showAnimation`        | `bool`                 | `true`           | Enable or disable page animation      |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `pages` | `List<PageModel>` | Required | List of onboarding pages. |
+| `showDots` | `bool` | `true` | Show page indicators (dots). |
+| `activeDotColor` | `Color` | `Colors.black` | Color of the active dot. |
+| `inactiveDotColor` | `Color` | `Colors.grey` | Color of inactive dots. |
+| `skipButtonText` | `String?` | `"Skip"` | Text for the skip button. |
+| `nextButtonText` | `String?` | `"Next"` | Text for the next button. |
+| `finishButtonText` | `String?` | `"Finish"` | Text for the finish button. |
+| `showSkipButton` | `bool?` | `true` | Show the skip button. |
+| `onSkipClick` | `void Function()?` | `null` | Callback for skip button. |
+| `onFinishClick` | `void Function()?` | `null` | Callback for finish button. |
+| `titleTextStyle` | `TextStyle?` | `null` | Style for the title text. |
+| `bodyTextStyle` | `TextStyle?` | `null` | Style for the body text. |
+| `buttonTextStyle` | `TextStyle?` | `null` | Style for button text. |
+| `allButtonsStyle` | `TextStyle?` | `null` | Button Style for all text buttons "OutlinedButton.styleFrom()". |
+| `skipButtonStyle` | `ButtonStyle?` | `null` | Button Style for skip button "OutlinedButton.styleFrom()". |
+| `nextButtonStyle` | `ButtonStyle?` | `null` | Button Style for next button "OutlinedButton.styleFrom()". |
+| `finishButtonStyle` | `ButtonStyle?` | `null` | Button Style for finish button "OutlinedButton.styleFrom()". |
+| `showAnimation` | `bool` | `true` | Enable animations for elements. |
+| `buttonPadding` | `EdgeInsetsGeometry` | `EdgeInsets.all(10.0)` | Padding for buttons. |
 
 ## PageModel
 
@@ -87,8 +95,13 @@ PageModel(
   bodyTextColor: Colors.white70,
 )
 ```
+## Contributing
+Contributions are welcome! If you find a bug or have a feature request, feel free to create an issue or submit a pull request on [GitHub](https://github.com/ahmedkhan4u/custom_onboard).
 
 ## License
 This project is licensed under the MIT License.
+
+## Author
+Developed by **Muhammad Ahmed**.
 
 

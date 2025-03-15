@@ -1,5 +1,5 @@
-## 0.0.2 
+## 0.0.3
 
-* Text Overflow Issue Resolved
+* Updated Documentation, Buttons Box Decoration Changed from Container to OutlinedButton
 
 

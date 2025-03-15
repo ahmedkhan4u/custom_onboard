@@ -3,37 +3,100 @@ library custom_onboard;
 export 'custom_onboard.dart';
 export 'src/page_model.dart';
 
+import 'package:custom_onboard/src/custom_button.dart';
 import 'package:custom_onboard/src/page_model.dart';
 import 'package:flutter/material.dart';
 
+/// A customizable onboarding screen widget with animation, navigation buttons, and indicators.
 class CustomOnboard extends StatefulWidget {
+  /// List of onboarding pages.
   final List<PageModel> pages;
 
+  /// Whether to show dots as page indicators.
   final bool? showDots;
+
+  /// Color of the active dot indicator.
   final Color? activeDotColor;
+
+  /// Color of inactive dot indicators.
   final Color? inactiveDotColor;
+
+  /// Text for the skip button.
   final String? skipButtonText;
+
+  /// Text for the next button.
   final String? nextButtonText;
+
+  /// Text for the finish button.
   final String? finishButtonText;
+
+  /// Whether to show the skip button.
   final bool? showSkipButton;
+
+  /// Callback when the skip button is clicked.
   final void Function()? onSkipClick;
+
+  /// Callback when the finish button is clicked.
   final void Function()? onFinishClick;
+
+  /// Style for the title text.
   final TextStyle? titleTextStyle;
+
+  /// Style for the body text.
   final TextStyle? bodyTextStyle;
+
+  /// Text alignment for the body text.
   final TextAlign? bodyTextAlignment;
+
+  /// Style for button text.
   final TextStyle? buttonTextStyle;
+
+  /// Style for the skip button text.
   final TextStyle? skipButtonTextStyle;
+
+  /// Style for the next button text.
   final TextStyle? nextButtonTextStyle;
+
+  /// Style for the finish button text.
   final TextStyle? finishButtonTextStyle;
-  final BoxDecoration? buttonBoxDecoration;
-  final BoxDecoration? skipButtonBoxDecoration;
-  final BoxDecoration? nextButtonBoxDecoration;
-  final BoxDecoration? finishButtonBoxDecoration;
+
+  /// Button Style for all text buttons buttons OutlinedButton.styleFrom(backgroundColor: Colors.blueGrey)
+  final ButtonStyle? allButtonsStyle;
+
+  /// Button Style for skip buttons OutlinedButton.styleFrom(backgroundColor: Colors.blueGrey)
+  final ButtonStyle? skipButtonStyle;
+
+  /// Button Style for next buttons OutlinedButton.styleFrom(backgroundColor: Colors.blueGrey)
+  final ButtonStyle? nextButtonStyle;
+
+  /// Button Style for finish buttons OutlinedButton.styleFrom(backgroundColor: Colors.blueGrey)
+  final ButtonStyle? finishButtonStyle;
+
+  /// Color of the skip button text.
   final Color skipButtonTextColor;
+
+  /// Color of the finish button text.
   final Color finishButtonTextColor;
+
+  /// Color of the next button text.
   final Color nextButtonTextColor;
+
+  /// Color of the skip button.
+  final Color? skipButtonColor;
+
+  /// Color of the finish button.
+  final Color? finishButtonColor;
+
+  /// Color of the next button.
+  final Color? nextButtonColor;
+
+  /// Whether to enable animation for onboarding elements.
   final bool showAnimation;
+
+  /// Padding for buttons.
   final EdgeInsetsGeometry buttonPadding;
+
+  /// Creates a `CustomOnboard` widget.
 
   const CustomOnboard({
     super.key,
@@ -54,32 +117,45 @@ class CustomOnboard extends StatefulWidget {
     this.skipButtonTextStyle,
     this.nextButtonTextStyle,
     this.finishButtonTextStyle,
-    this.buttonBoxDecoration,
-    this.skipButtonBoxDecoration,
-    this.nextButtonBoxDecoration,
-    this.finishButtonBoxDecoration,
+    this.allButtonsStyle,
+    this.skipButtonStyle,
+    this.nextButtonStyle,
+    this.finishButtonStyle,
     this.skipButtonTextColor = Colors.black,
     this.finishButtonTextColor = Colors.black,
     this.nextButtonTextColor = Colors.black,
     this.showAnimation = true,
     this.buttonPadding = const EdgeInsets.all(10.0),
+    this.skipButtonColor,
+    this.finishButtonColor,
+    this.nextButtonColor,
   });
 
   @override
   State<CustomOnboard> createState() => _CustomOnboardState();
 }
 
-class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateMixin {
+/// The state class for `CustomOnboard`, handling page navigation and animations.
+
+class _CustomOnboardState extends State<CustomOnboard>
+    with TickerProviderStateMixin {
+  /// Animation controller for onboarding animations.
   late final AnimationController _animationController = AnimationController(
     duration: const Duration(seconds: 2),
     vsync: this,
   );
+
+  /// Animation for onboarding elements.
+
   late final Animation<double> _animation = CurvedAnimation(
     parent: _animationController,
     curve: Curves.fastOutSlowIn,
   );
 
+  /// Controller for the onboarding pages.
   final PageController _pageController = PageController(initialPage: 0);
+
+  /// Index of the current onboarding page.
 
   int _currentPage = 0;
 
@@ -130,7 +206,8 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                           ? ScaleTransition(
                               scale: _animation,
                               child: Visibility(
-                                visible: _currentPage == widget.pages.indexOf(page),
+                                visible:
+                                    _currentPage == widget.pages.indexOf(page),
                                 child: Image.asset(
                                   page.imagePath!,
                                   height: height * 0.3,
@@ -186,21 +263,21 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _currentPage != (widget.pages.length - 1) && widget.showSkipButton!
+                  _currentPage != (widget.pages.length - 1) &&
+                          widget.showSkipButton!
                       ? Expanded(
                           child: Align(
                           alignment: Alignment.bottomLeft,
-                          child: InkWell(
-                              onTap: widget.onSkipClick,
-                              child: Container(
-                                  decoration: widget.skipButtonBoxDecoration ?? widget.buttonBoxDecoration,
-                                  padding: widget.buttonPadding,
-                                  child: Text(
-                                    widget.skipButtonText ?? "SKIP",
-                                    style: widget.skipButtonTextStyle ??
-                                        widget.buttonTextStyle ??
-                                        TextStyle(fontSize: 16, color: widget.skipButtonTextColor),
-                                  ))),
+                          child: CustomButton(
+                            text: widget.skipButtonText ?? "Skip",
+                            onTap: widget.onSkipClick,
+                            textStyle: widget.skipButtonTextStyle,
+                            textColor: widget.skipButtonTextColor,
+                            buttonStyle: widget.allButtonsStyle ??
+                                widget.skipButtonStyle,
+                            buttonColor: widget.skipButtonColor,
+                            padding: widget.buttonPadding,
+                          ),
                         ))
                       : const Expanded(child: SizedBox.shrink()),
                   widget.showDots!
@@ -208,19 +285,22 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(14),
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: List.generate(widget.pages.length, (index) {
+                                  children: List.generate(widget.pages.length,
+                                      (index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(right: 4),
                                       child: Icon(
                                         Icons.circle,
                                         size: 12,
                                         color: _currentPage == index
-                                            ? widget.activeDotColor ?? Colors.blueGrey
-                                            : widget.inactiveDotColor ?? Colors.grey,
+                                            ? widget.activeDotColor ??
+                                                Colors.blueGrey
+                                            : widget.inactiveDotColor ??
+                                                Colors.grey,
                                       ),
                                     );
                                   })),
@@ -234,22 +314,22 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                       ? Expanded(
                           child: Align(
                           alignment: Alignment.bottomRight,
-                          child: InkWell(
-                              onTap: () {
-                                if (_currentPage < widget.pages.length - 1) {
-                                  _pageController.nextPage(
-                                      duration: const Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-                                }
-                              },
-                              child: Container(
-                                  decoration: widget.nextButtonBoxDecoration ?? widget.buttonBoxDecoration,
-                                  padding: widget.buttonPadding,
-                                  child: Text(
-                                    widget.nextButtonText ?? "Next",
-                                    style: widget.nextButtonTextStyle ??
-                                        widget.buttonTextStyle ??
-                                        TextStyle(fontSize: 16, color: widget.nextButtonTextColor),
-                                  ))),
+                          child: CustomButton(
+                            text: widget.nextButtonText ?? "Next",
+                            onTap: () {
+                              if (_currentPage < widget.pages.length - 1) {
+                                _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.fastOutSlowIn);
+                              }
+                            },
+                            textStyle: widget.nextButtonTextStyle,
+                            textColor: widget.nextButtonTextColor,
+                            buttonStyle: widget.allButtonsStyle ??
+                                widget.nextButtonStyle,
+                            buttonColor: widget.nextButtonColor,
+                            padding: widget.buttonPadding,
+                          ),
                         ))
                       :
 
@@ -257,18 +337,15 @@ class _CustomOnboardState extends State<CustomOnboard> with TickerProviderStateM
                       Expanded(
                           child: Align(
                           alignment: Alignment.bottomRight,
-                          child: Material(
-                            child: InkWell(
-                                onTap: widget.onFinishClick,
-                                child: Container(
-                                    decoration: widget.finishButtonBoxDecoration ?? widget.buttonBoxDecoration,
-                                    padding: widget.buttonPadding,
-                                    child: Text(
-                                      widget.finishButtonText ?? "Finish",
-                                      style: widget.finishButtonTextStyle ??
-                                          widget.buttonTextStyle ??
-                                          TextStyle(fontSize: 16, color: widget.finishButtonTextColor),
-                                    ))),
+                          child: CustomButton(
+                            text: widget.finishButtonText ?? "Finish",
+                            onTap: widget.onFinishClick,
+                            textStyle: widget.finishButtonTextStyle,
+                            textColor: widget.finishButtonTextColor,
+                            buttonStyle: widget.allButtonsStyle ??
+                                widget.finishButtonStyle,
+                            buttonColor: widget.finishButtonColor,
+                            padding: widget.buttonPadding,
                           ),
                         )),
                 ],

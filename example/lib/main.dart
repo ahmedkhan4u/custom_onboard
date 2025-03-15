@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:custom_onboard/custom_onboard.dart';
 
+/// The entry point of the application.
 void main() {
   runApp(const MyApp());
 }
 
+/// The root widget of the application.
 class MyApp extends StatelessWidget {
+  /// Creates an instance of `MyApp`.
   const MyApp({super.key});
 
   @override
@@ -21,13 +24,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// The home page of the application that displays the onboarding screens.
 class MyHomePage extends StatefulWidget {
+  /// Creates an instance of `MyHomePage`.
   const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+/// The state for `MyHomePage` that manages onboarding functionality.
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -54,13 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
 
+        /// The text displayed on the finish button.
         finishButtonText: "Get Started",
-        // showAnimation: false,
+
+        /// Callback function when onboarding is completed.
         onFinishClick: () {
           debugPrint('Onboarding completed');
           // Navigate to your desired page here.
           // Example: Navigator.pushNamed(context, '/your_desired_page');
         },
+
+        /// Callback function when the onboarding is skipped.
         onSkipClick: () {
           debugPrint('Onboarding skipped');
           // Navigate to your desired page here.

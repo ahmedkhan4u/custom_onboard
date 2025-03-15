@@ -2,7 +2,7 @@
 
 This project provides a customizable onboarding component for Flutter apps. It allows you to create onboarding screens with flexible design and behavior options.
 
-![Screen_recording_20250315_222205](https://github.com/user-attachments/assets/abc8d24b-0e25-4b75-aca9-5451aaa2c59d)
+https://github.com/user-attachments/assets/898c952c-290d-4076-a091-3287a8fbe61f
 
 ## Features
 - Multiple onboarding screens
